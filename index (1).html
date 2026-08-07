@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kai Qin — University of North Texas</title>
+<meta name="description" content="Kai Qin, PhD candidate in Management Science at the University of North Texas. Research in operations management, supply chain management, and workplace safety.">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --paper:  #FBFBF9;
+    --ink:    #1C2B3A;
+    --muted:  #5C6670;
+    --accent: #2F5D8A;
+    --rule:   #C9CCC6;
+    --chipbg: #F1F2EE;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Public Sans", -apple-system, "Segoe UI", sans-serif;
+    font-size: 16.5px;
+    line-height: 1.65;
+  }
+
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 56px 24px 40px;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover, a:focus-visible { text-decoration: underline; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* ---- ID card: photo left, personal information right ---- */
+  .idcard {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 36px;
+    align-items: center;
+  }
+  .idcard img {
+    width: 100%;
+    border-radius: 4px;
+    display: block;
+  }
+  h1 {
+    font-family: "Newsreader", Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(32px, 5.5vw, 42px);
+    letter-spacing: 0.01em;
+    margin-bottom: 4px;
+  }
+  .idcard .role {
+    font-size: 17px;
+    margin-bottom: 10px;
+  }
+  .idcard .contact {
+    color: var(--muted);
+    font-size: 15.5px;
+    line-height: 1.55;
+  }
+
+  /* Booktabs-style double rule below the header */
+  .toprule { border: 0; border-top: 2.5px solid var(--ink); margin: 34px 0 3px; }
+  .toprule + hr { border: 0; border-top: 1px solid var(--ink); margin-bottom: 8px; }
+
+  /* ---- Sections: label sitting on a hairline midrule ---- */
+  section { margin-top: 40px; }
+  h2 {
+    font-family: "Public Sans", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 8px;
+    margin-bottom: 18px;
+  }
+  .introduction p + p { margin-top: 12px; }
+
+  /* ---- Education ---- */
+  .edu-item { margin-top: 12px; }
+  .edu-item .school {
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .edu-item .school span:last-child {
+    color: var(--muted);
+    font-weight: 400;
+    white-space: nowrap;
+  }
+  .edu-item .degree { color: var(--muted); font-size: 15px; }
+
+  /* ---- Research interests chips ---- */
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; }
+  .chips li {
+    background: var(--chipbg);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 6px 13px;
+    font-size: 15px;
+  }
+
+  /* ---- Current research & publications ---- */
+  .projects { list-style: none; counter-reset: proj; }
+  .projects > li { margin-bottom: 20px; padding-left: 34px; position: relative; }
+  .projects > li::before {
+    counter-increment: proj;
+    content: counter(proj) ".";
+    position: absolute;
+    left: 0;
+    font-family: "Newsreader", Georgia, serif;
+    font-size: 19px;
+    color: var(--muted);
+  }
+  .proj-title {
+    font-family: "Newsreader", Georgia, serif;
+    font-size: 19.5px;
+    font-weight: 500;
+  }
+  .proj-note { color: var(--muted); font-size: 15.5px; }
+  .status {
+    display: inline-block;
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 3px;
+    padding: 1px 7px;
+    margin-left: 6px;
+    vertical-align: 2px;
+  }
+
+  .pubs { list-style: none; }
+  .pubs li { margin-bottom: 14px; }
+
+  /* ---- CV button ---- */
+  .cv-button {
+    display: inline-block;
+    background: var(--ink);
+    color: #fff;
+    border-radius: 4px;
+    padding: 10px 22px;
+    font-weight: 500;
+  }
+  .cv-button:hover { background: var(--accent); text-decoration: none; }
+
+  /* ---- Footer: bottomrule ---- */
+  footer { margin-top: 56px; }
+  .botrule { border: 0; border-top: 1px solid var(--ink); margin-bottom: 3px; }
+  .botrule + hr { border: 0; border-top: 2.5px solid var(--ink); margin-bottom: 14px; }
+  footer p { color: var(--muted); font-size: 14px; }
+
+  @media (max-width: 640px) {
+    .idcard { grid-template-columns: 1fr; gap: 20px; }
+    .idcard img { max-width: 200px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       PHOTO + PERSONAL INFORMATION
+       Your photo comes from the file "profile.png" in this repository.
+       To change the photo, upload a new image named profile.png.
+       To change your contact details, edit the lines below.
+       ═══════════════════════════════════════════════════════════════ -->
+  <header class="idcard">
+    <img src="profile.png" alt="Portrait of Kai Qin">
+
+    <div>
+      <h1>Kai Qin</h1>
+      <p class="role">PhD Candidate in Management Science</p>
+      <p class="contact">
+        G. Brint Ryan College of Business<br>
+        1155 Union Circle<br>
+        Denton, TX 76203-5017<br>
+        Ph: 940-222-9191<br>
+        <a href="mailto:Kai.Qin@unt.edu">Kai.Qin@unt.edu</a>
+      </p>
+    </div>
+  </header>
+
+  <hr class="toprule"><hr>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       INTRODUCTION
+       Edit the paragraph below. To add a second paragraph,
+       add another <p> ... </p> under the first one.
+       ═══════════════════════════════════════════════════════════════ -->
+  <section class="introduction">
+    <h2>Introduction</h2>
+    <p>
+      I am a PhD candidate in Management Science at the University of North
+      Texas, in the Department of Information Technology and Decision
+      Sciences (ITDS), G. Brint Ryan College of Business. My research
+      examines how firms' operational and employment decisions shape
+      workplace outcomes, with current projects on employee benefits and
+      workplace safety, information transparency in supply chains, and
+      organizational applications of artificial intelligence.
+    </p>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       EDUCATION
+       To add a degree, copy one <div class="edu-item"> ... </div>
+       block and edit the text inside it.
+       ═══════════════════════════════════════════════════════════════ -->
+  <section>
+    <h2>Education</h2>
+
+    <div class="edu-item">
+      <div class="school"><span>University of North Texas</span><span>Denton, TX</span></div>
+      <div class="degree">PhD Candidate in Management Science, ITDS Department, G. Brint Ryan College of Business</div>
+    </div>
+
+    <div class="edu-item">
+      <div class="school"><span>Boston University</span><span>Boston, MA</span></div>
+      <div class="degree">Master of Science in Actuarial Science</div>
+    </div>
+
+    <div class="edu-item">
+      <div class="school"><span>Texas Christian University</span><span>Fort Worth, TX</span></div>
+      <div class="degree">Bachelor of Arts in Mathematics, Actuarial Concentration</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       RESEARCH INTERESTS
+       Each interest is one <li> line. Add or delete lines freely.
+       ═══════════════════════════════════════════════════════════════ -->
+  <section>
+    <h2>Research Interests</h2>
+    <ul class="chips">
+      <li>Operations Management</li>
+      <li>Supply Chain Management</li>
+      <li>Workplace Safety &amp; Employee Benefits</li>
+      <li>Data Analytics</li>
+      <li>Experimental Design</li>
+    </ul>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       CURRENT RESEARCH
+       Each project is one <li> block with a title line and a note line.
+       To add a project, copy a whole <li> ... </li> block.
+       The numbering updates automatically.
+       ═══════════════════════════════════════════════════════════════ -->
+  <section>
+    <h2>Current Research</h2>
+    <ol class="projects">
+
+      <li>
+        <div class="proj-title">Employee Benefits and Workplace Safety</div>
+        <div class="proj-note">Dissertation research linking firms' employee benefit decisions to their workplace safety outcomes.</div>
+      </li>
+
+      <li>
+        <div class="proj-title">Information Transparency in Supply Chains</div>
+        <div class="proj-note">How the visibility of information across supply chain partners affects customer behavior and performance.</div>
+      </li>
+
+      <li>
+        <div class="proj-title">Artificial Intelligence in Information Systems</div>
+        <div class="proj-note">How organizations adopt and use AI technologies.</div>
+      </li>
+
+      <li>
+        <div class="proj-title">Research on ChatGPT <span class="status">Under review · Internet Research</span></div>
+        <div class="proj-note">Empirical study of ChatGPT use, currently under review.</div>
+      </li>
+
+    </ol>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       PUBLICATIONS
+       When a paper is published, copy the <li> line below and edit it.
+       Suggested format:
+       Author, A., &amp; Author, B. (Year). Title. Journal Name.
+       ═══════════════════════════════════════════════════════════════ -->
+  <section>
+    <h2>Publications</h2>
+    <ul class="pubs">
+      <li>Peer-reviewed publications will be listed here as papers move through review.</li>
+    </ul>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       CONFERENCE PRESENTATIONS
+       Each entry is one <li> line. Newest first.
+       NOTE: The two 2025 DSI paper titles below are descriptive
+       placeholders — replace them with the exact titles from the
+       conference program. Same for the SWDSI presentation title.
+       ═══════════════════════════════════════════════════════════════ -->
+  <section>
+    <h2>Conference Presentations</h2>
+    <ul class="pubs">
+      <li>Information Transparency in Supply Chains. Presented at the 56th Annual Conference of the Decision Sciences Institute (DSI), Orlando, FL, November 2025.</li>
+      <li>Drone Delivery of Medical Supplies. Presented at the 56th Annual Conference of the Decision Sciences Institute (DSI), Orlando, FL, November 2025.</li>
+      <li>Presentation at the Southwest Decision Sciences Institute (SWDSI) Annual Conference, Dallas, TX, 2025.</li>
+      <li>Attended the 55th Annual Conference of the Decision Sciences Institute (DSI), Phoenix, AZ, November 2024.</li>
+    </ul>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       CV
+       Upload your CV to this repository as a file named "cv.pdf"
+       and the button below will work automatically.
+       ═══════════════════════════════════════════════════════════════ -->
+  <section>
+    <h2>Curriculum Vitae</h2>
+    <a class="cv-button" href="cv.pdf">Download CV (PDF)</a>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════════════════════════ -->
+  <footer>
+    <hr class="botrule"><hr>
+    <p>Kai Qin · <a href="mailto:Kai.Qin@unt.edu">Kai.Qin@unt.edu</a> · University of North Texas</p>
+  </footer>
+
+</div>
+</body>
+</html>
