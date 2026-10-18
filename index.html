@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kai Qin — University of North Texas</title>
-<meta name="description" content="Kai Qin, PhD candidate in Management Science at the University of North Texas. Research in operations management, supply chain management, and workplace safety.">
+<meta name="description" content="Kai Qin, PhD candidate in Management Science at the University of North Texas. Research on workforce investment, regulatory oversight, and workplace safety using linked federal data; supply chain service design; and generative AI.">
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -65,7 +65,24 @@
   }
   .idcard .role {
     font-size: 17px;
-    margin-bottom: 16px;
+    margin-bottom: 4px;
+  }
+  .idcard .dept {
+    color: var(--muted);
+    font-size: 15.5px;
+    margin-bottom: 14px;
+  }
+  .idcard .market {
+    display: inline-block;
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 3px;
+    padding: 2px 9px;
+    margin-bottom: 14px;
   }
   .idcard .contact {
     color: var(--muted);
@@ -90,10 +107,18 @@
     padding-bottom: 8px;
     margin-bottom: 18px;
   }
+  h3 {
+    font-family: "Newsreader", Georgia, serif;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 22px 0 10px;
+  }
+  h3:first-of-type { margin-top: 0; }
   .introduction p + p { margin-top: 12px; }
 
   /* ---- Education ---- */
-  .edu-item { margin-top: 12px; }
+  .edu-item { margin-top: 14px; }
+  .edu-item:first-of-type { margin-top: 0; }
   .edu-item .school {
     font-weight: 600;
     display: flex;
@@ -106,6 +131,8 @@
     white-space: nowrap;
   }
   .edu-item .degree { color: var(--muted); font-size: 15px; }
+  .edu-item .detail { font-size: 15px; margin-top: 4px; }
+  .edu-item .detail em { font-style: italic; }
 
   /* ---- Research interests chips ---- */
   .chips { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; }
@@ -117,40 +144,48 @@
     font-size: 15px;
   }
 
-  /* ---- Current research & publications ---- */
-  .projects { list-style: none; counter-reset: proj; }
-  .projects > li { margin-bottom: 20px; padding-left: 34px; position: relative; }
-  .projects > li::before {
-    counter-increment: proj;
-    content: counter(proj) ".";
-    position: absolute;
-    left: 0;
+  /* ---- Research entries ---- */
+  .papers { list-style: none; }
+  .papers li { margin-bottom: 18px; }
+  .paper-title {
     font-family: "Newsreader", Georgia, serif;
-    font-size: 19px;
-    color: var(--muted);
-  }
-  .proj-title {
-    font-family: "Newsreader", Georgia, serif;
-    font-size: 19.5px;
+    font-size: 18.5px;
     font-weight: 500;
+    line-height: 1.4;
   }
-  .proj-note { color: var(--muted); font-size: 15.5px; }
+  .paper-authors { font-size: 15px; }
+  .paper-note { color: var(--muted); font-size: 15px; }
   .status {
     display: inline-block;
-    font-size: 12.5px;
+    font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--accent);
     border: 1px solid var(--accent);
     border-radius: 3px;
-    padding: 1px 7px;
-    margin-left: 6px;
-    vertical-align: 2px;
+    padding: 0 7px;
+    margin-right: 6px;
+    vertical-align: 1px;
   }
 
   .pubs { list-style: none; }
   .pubs li { margin-bottom: 14px; }
+
+  /* ---- Simple two-column rows (teaching, honors, service) ---- */
+  .rows { list-style: none; }
+  .rows li {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 10px;
+  }
+  .rows li span:last-child {
+    color: var(--muted);
+    white-space: nowrap;
+    font-size: 15px;
+  }
+  .rows .sub { display: block; color: var(--muted); font-size: 15px; }
 
   /* ---- CV button ---- */
   .cv-button {
@@ -170,8 +205,9 @@
   footer p { color: var(--muted); font-size: 14px; }
 
   @media (max-width: 640px) {
-    .idcard { grid-template-columns: 1fr; gap: 20px; }
+    .idcard { grid-template-columns: 1fr; gap: 20px; justify-items: center; }
     .idcard img { max-width: 200px; }
+    .rows li, .edu-item .school { flex-direction: column; gap: 0; }
   }
 </style>
 </head>
@@ -183,6 +219,8 @@
        Your photo comes from the file "profile.png" in this repository.
        To change the photo, upload a new image named profile.png.
        To change your contact details, edit the lines below.
+       To remove the "job market" badge after the season, delete the
+       line that starts with <p class="market">.
        ═══════════════════════════════════════════════════════════════ -->
   <header class="idcard">
     <img src="profile.png" alt="Portrait of Kai Qin">
@@ -190,6 +228,8 @@
     <div class="info">
       <h1>Kai Qin</h1>
       <p class="role">PhD Candidate in Management Science</p>
+      <p class="dept">Information Technology and Decision Sciences<br>University of North Texas</p>
+      <p class="market">On the academic job market, 2026–27</p>
       <p class="contact">
         G. Brint Ryan College of Business<br>
         1155 Union Circle<br>
@@ -204,19 +244,27 @@
 
   <!-- ═══════════════════════════════════════════════════════════════
        INTRODUCTION
-       Edit the paragraph below. To add a second paragraph,
-       add another <p> ... </p> under the first one.
+       Edit the paragraphs below. To add a paragraph,
+       add another <p> ... </p>.
        ═══════════════════════════════════════════════════════════════ -->
   <section class="introduction">
     <h2>Introduction</h2>
     <p>
       I am a PhD candidate in Management Science at the University of North
       Texas, in the Department of Information Technology and Decision
-      Sciences (ITDS), G. Brint Ryan College of Business. My research
-      examines how firms' operational and employment decisions shape
-      workplace outcomes, with current projects on employee benefits and
-      workplace safety, information transparency in supply chains, and
-      organizational applications of artificial intelligence.
+      Sciences (ITDS), G. Brint Ryan College of Business, advised by
+      Dr. Victor Prybutok. My research asks which operating decisions
+      actually change outcomes for workers, and which only mark the firms
+      that were going to do well anyway.
+    </p>
+    <p>
+      My dissertation links firms' federal employee-benefit filings to their
+      injury records and inspection histories, building a panel of 26,757
+      U.S. employers, and uses designs that separate differences between
+      firms from changes within them. I also study how delivery information
+      shapes customers' judgments of service, and how people engage with
+      generative AI. I am currently instructor of record for the department's
+      senior analytics capstone.
     </p>
   </section>
 
@@ -229,12 +277,14 @@
     <h2>Education</h2>
 
     <div class="edu-item">
-      <div class="school"><span>University of North Texas</span><span>Denton, TX</span></div>
-      <div class="degree">PhD Candidate in Management Science, ITDS Department, G. Brint Ryan College of Business</div>
+      <div class="school"><span>University of North Texas</span><span>Expected May 2027</span></div>
+      <div class="degree">PhD in Management Science, minor in Finance · ITDS Department, G. Brint Ryan College of Business</div>
+      <div class="detail">Dissertation: <em>Workforce Investment, Regulatory Oversight, and Workplace Safety: Evidence from Linked Federal Data</em></div>
+      <div class="detail">Committee: Dr. Victor Prybutok (Chair), Dr. Ronnie Jia (Co-Chair), Dr. Vipul Garg, Dr. Suman Niranjan, Dr. Aaron Bonnett</div>
     </div>
 
     <div class="edu-item">
-      <div class="school"><span>Boston University</span><span>Boston, MA</span></div>
+      <div class="school"><span>Boston University</span><span>2022</span></div>
       <div class="degree">Master of Science in Actuarial Science</div>
     </div>
 
@@ -252,73 +302,123 @@
     <h2>Research Interests</h2>
     <ul class="chips">
       <li>Operations Management</li>
-      <li>Supply Chain Management</li>
-      <li>Workplace Safety &amp; Employee Benefits</li>
-      <li>Secondary data research</li>
-      <li>Experimental Design</li>
+      <li>Workplace Safety &amp; Workforce Analytics</li>
+      <li>Supply Chain &amp; Logistics Service Design</li>
+      <li>Generative AI in Organizations</li>
+      <li>Linked Administrative Data &amp; Panel Econometrics</li>
+      <li>Experimental &amp; Survey Methods</li>
     </ul>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       CURRENT RESEARCH
-       Each project is one <li> block with a title line and a note line.
-       To add a project, copy a whole <li> ... </li> block.
-       The numbering updates automatically.
+       RESEARCH
+       Three groups: Under Review, Working Papers, and (later) Publications.
+       Each paper is one <li> block: title, authors, and a status line.
+       Your name is wrapped in <strong> so it shows in bold.
+       When a paper is accepted, move its <li> block into a
+       "Publications" group and change the status chip.
        ═══════════════════════════════════════════════════════════════ -->
   <section>
-    <h2>Current Research</h2>
-    <ol class="projects">
+    <h2>Research</h2>
 
+    <h3>Under Review</h3>
+    <ul class="papers">
       <li>
-        <div class="proj-title">Employee Benefits and Workplace Safety</div>
-        <div class="proj-note">Dissertation research linking firms' employee benefit decisions to their workplace safety outcomes.</div>
+        <div class="paper-title">Competence and Humanness in Parasocial Gratification: Algorithmic Social Cues and Relational Continuance with Generative Artificial Intelligence</div>
+        <div class="paper-authors"><strong>Qin</strong>, Guyo, Prybutok, &amp; Qin</div>
+        <div class="paper-note"><span class="status">Under review</span><em>Internet Research</em></div>
       </li>
-
       <li>
-        <div class="proj-title">Information Transparency in Supply Chains</div>
-        <div class="proj-note">How the visibility of information across supply chain partners affects customer behavior and performance.</div>
+        <div class="paper-title">The Socially Embedded AI Encounter Framework (SEAEF): Explaining Dual Value Formation in Meta AI</div>
+        <div class="paper-authors">Majumder, <strong>Qin</strong>, Faress, &amp; Qin</div>
+        <div class="paper-note"><span class="status">Under review</span><em>Industrial Management &amp; Data Systems</em></div>
       </li>
+    </ul>
 
+    <h3>Working Papers</h3>
+    <ul class="papers">
       <li>
-        <div class="proj-title">Artificial Intelligence in Information Systems</div>
-        <div class="proj-note">How organizations adopt and use AI technologies.</div>
+        <div class="paper-title">Decision Levers or Structural Correlations? A Within-Firm Diagnostic Applied to Employee Benefits and Workplace Injuries</div>
+        <div class="paper-authors"><strong>Qin</strong>, Garg, Heinrich, &amp; Prybutok</div>
+        <div class="paper-note"><span class="status">Job market paper</span>Dissertation Paper 1 · DSI 2026 Doctoral Research Showcase (Best Paper) Award Finalist</div>
       </li>
-
       <li>
-        <div class="proj-title">Research on ChatGPT <span class="status">Under review · Internet Research</span></div>
-        <div class="proj-note">Empirical study of ChatGPT use, currently under review.</div>
+        <div class="paper-title">Observation or Sanction? How External Monitoring Changes Operational Safety</div>
+        <div class="paper-authors"><strong>Qin</strong>, Garg, Bonnett, &amp; Prybutok</div>
+        <div class="paper-note"><span class="status">Working paper</span>Dissertation Paper 2 · preliminary results</div>
       </li>
-
-    </ol>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════════════════════
-       PUBLICATIONS
-       When a paper is published, copy the <li> line below and edit it.
-       Suggested format:
-       Author, A., &amp; Author, B. (Year). Title. Journal Name.
-       ═══════════════════════════════════════════════════════════════ -->
-  <section>
-    <h2>Publications</h2>
-    <ul class="pubs">
-      <li>Peer-reviewed publications will be listed here as papers move through review.</li>
+      <li>
+        <div class="paper-title">When More Is Not Always Better: Information Richness in Last-Mile Tracking, Perceived Service Quality, and Customer Satisfaction</div>
+        <div class="paper-authors"><strong>Qin</strong>, Ho, Garg, Prybutok, &amp; Niranjan</div>
+        <div class="paper-note"><span class="status">Working paper</span>Earlier versions presented at DSI 2025 and SWDSI 2026</div>
+      </li>
     </ul>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════════
        CONFERENCE PRESENTATIONS
        Each entry is one <li> line. Newest first.
-       NOTE: The two 2025 DSI paper titles below are descriptive
-       placeholders — replace them with the exact titles from the
-       conference program. Same for the SWDSI presentation title.
+       NOTE: Check the two 2025 DSI titles and the SWDSI title against
+       the conference programs and replace them if they differ.
        ═══════════════════════════════════════════════════════════════ -->
   <section>
     <h2>Conference Presentations</h2>
     <ul class="pubs">
-      <li>Qin, K., Ho, T. K., Garg, V., Niranjan, S., &amp; Prybutok, V. "Balancing Richness and Fluency: The Cognitive Impact of Delivery Tracking Transparency on Service Quality." Southwest Decision Sciences Institute (SWDSI) Annual Conference, Dallas, TX, March 2026.</li>
-      <li>Qin, K., Ho, T. K., Garg, V., Niranjan, S., &amp; Prybutok, V. "Pharmaceutical Delivery Transparency: Patient Information Expectations in Prescription Shipment Communications." Decision Sciences Institute (DSI) Annual Conference, Orlando, FL, November 2025.</li>
-      <li>Qin, K., Garg, V., Prybutok, V., Niranjan, S., &amp; Ho, T. K. "From 'Out for Delivery' to 'Out of Patience': The Power of Transparency." Decision Sciences Institute (DSI) Annual Conference, Orlando, FL, November 2025.</li>
-      <li>Attended the 55th Annual Conference of the Decision Sciences Institute (DSI), Phoenix, AZ, November 2024.</li>
+      <li><strong>Qin, K.</strong>, Garg, V., Heinrich, A., &amp; Prybutok, V. "Decision Levers or Structural Correlations? A Within-Firm Diagnostic Applied to Employee Benefits and Workplace Injuries." Decision Sciences Institute (DSI) Annual Conference, Doctoral Research Showcase, San Francisco, CA, November 2026. <em>Best Paper Award Finalist.</em></li>
+      <li><strong>Qin, K.</strong>, Ho, T. K., Garg, V., Niranjan, S., &amp; Prybutok, V. "Balancing Richness and Fluency: The Cognitive Impact of Delivery Tracking Transparency on Service Quality." Southwest Decision Sciences Institute (SWDSI) Annual Conference, Dallas, TX, March 2026.</li>
+      <li><strong>Qin, K.</strong>, Ho, T. K., Garg, V., Niranjan, S., &amp; Prybutok, V. "Pharmaceutical Delivery Transparency: Patient Information Expectations in Prescription Shipment Communications." Decision Sciences Institute (DSI) Annual Conference, Orlando, FL, November 2025.</li>
+      <li><strong>Qin, K.</strong>, Garg, V., Prybutok, V., Niranjan, S., &amp; Ho, T. K. "From 'Out for Delivery' to 'Out of Patience': The Power of Transparency." Decision Sciences Institute (DSI) Annual Conference, Orlando, FL, November 2025.</li>
+    </ul>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       TEACHING
+       Each course is one <li>: course on the left, term on the right.
+       Newest first.
+       ═══════════════════════════════════════════════════════════════ -->
+  <section>
+    <h2>Teaching</h2>
+
+    <h3>Instructor of Record</h3>
+    <ul class="rows">
+      <li>
+        <span>DSCI 4700 · Analytics for Decision Making (undergraduate capstone)
+          <span class="sub">Teaching Fellow; course coordinator Dr. Victor Prybutok</span></span>
+        <span>Fall 2026</span>
+      </li>
+    </ul>
+
+    <h3>Teaching Assistant, University of North Texas</h3>
+    <ul class="rows">
+      <li><span>DSCI 4700 · Analytics for Decision Making</span><span>Spring 2026</span></li>
+      <li><span>DSCI 3710 · also Junior Lab Manager</span><span>Fall 2025</span></li>
+      <li><span>DSCI 5180</span><span>Summer 2025</span></li>
+      <li><span>DSCI 5250</span><span>Fall 2024, Spring 2025</span></li>
+    </ul>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       HONORS & AWARDS
+       ═══════════════════════════════════════════════════════════════ -->
+  <section>
+    <h2>Honors &amp; Awards</h2>
+    <ul class="rows">
+      <li><span>DSI Doctoral Research Showcase (Best Paper) Award Finalist</span><span>2026</span></li>
+      <li><span>UNT Toulouse Graduate School Travel Grant</span><span>2024–25, 2025–26</span></li>
+      <li><span>UNT Tuition Benefit Program (TBP) Award</span><span></span></li>
+    </ul>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       SERVICE & AFFILIATIONS
+       ═══════════════════════════════════════════════════════════════ -->
+  <section>
+    <h2>Service &amp; Affiliations</h2>
+    <ul class="rows">
+      <li><span>Ad hoc reviewer: <em>Marketing Intelligence &amp; Planning</em>; <em>SN Business &amp; Economics</em></span><span></span></li>
+      <li><span>Conference reviewer: DSI and SWDSI Annual Conferences</span><span></span></li>
+      <li><span>Member, Decision Sciences Institute (DSI)</span><span>Since 2024</span></li>
+      <li><span>Member, Southwest Decision Sciences Institute (SWDSI)</span><span>Since 2025</span></li>
     </ul>
   </section>
 
